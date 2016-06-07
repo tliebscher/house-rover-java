@@ -23,7 +23,7 @@ Doors connect rooms. Doors are represented by
 * 2 sets of information for entering and leaving a room, each represented by
     * a room
     * a combination of x and y co-ordinates of the door and
-    * a letter representing one of the four cardinal compass points as the direction of the door.
+* a letter representing one of the four cardinal compass points as the direction of the door.
 
 Assume that the square directly North from (x, y) is (x, y+1).
 
