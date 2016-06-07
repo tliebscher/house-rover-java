@@ -9,7 +9,7 @@
         {
             "taskName": "clean",
             "showOutput": "silent",
-            "echoCommand": true,
+            "echoCommand": true
         },
         {
             "taskName": "compile",
@@ -20,7 +20,7 @@
                 "fileLocation": "absolute",
                 "pattern": [
                     {
-						"regexp": "^(.+\\.java):(\\d):(?:\\s+(error)):(?:\\s+(.*))$",
+						"regexp": "^\\[(\\w+)\\]\\s(.+\\.java):\\[(\\d+),(\\d+)\\]\\s(?:\\s*(.*))$",
 						"file": 1,
 						"location": 2,
 						"severity": 3,
@@ -39,7 +39,7 @@
                 "fileLocation": "absolute",
                 "pattern": [
                     {
-						"regexp": "^(.+\\.java):(\\d):(?:\\s+(error)):(?:\\s+(.*))$",
+						"regexp": "^\\[(\\w+)\\]\\s(.+\\.java):\\[(\\d+),(\\d+)\\]\\s(?:\\s*(.*))$",
 						"file": 1,
 						"location": 2,
 						"severity": 3,
@@ -48,6 +48,6 @@
                     }
                 ]
             }
-        }        
+        }
     ]
 }
