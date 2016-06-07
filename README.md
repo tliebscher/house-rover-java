@@ -7,17 +7,21 @@ An exercise in Java modeled after the Thoughtworks mars rover coding exercise
 A robotic rover is deployed in a house. The house is assumed to be flat and
 consists of rectangular rooms connected by doors.
 The rooms must be navigated by the rover.
+
 A rover's position and location is represented by
 * a string representing the name of a room,
 * a combination of x and y co-ordinates and
 * a letter representing one of the four cardinal compass points.
+
 Rooms are divided up into a grid to simplify navigation.
 An example position might be A 0,0 N, which means the rover is in room A in
 the bottom left corner and facing North.
+
 In order to control a rover, users send a simple string of letters.
 The possible letters are 'L', 'R' and 'M'.
 'L' and 'R' makes the rover spin 90 degrees left or right respectively, without moving from its current spot.
 'M' means move forward one grid point, and maintain the same heading.
+
 Doors connect rooms. Doors are represented by
 * a string representing the name of the door and
 * 2 sets of information for entering and leaving a room, each represented by
