@@ -1,5 +1,6 @@
 # house-rover-java
 An exercise in Java modeled after the Thoughtworks mars rover coding exercise
+and based on https://github.com/priyaaank/MarsRover
 
 ### House Rover puzzle
 --------------------
