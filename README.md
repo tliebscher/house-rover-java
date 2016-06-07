@@ -18,6 +18,12 @@ In order to control a rover, users send a simple string of letters.
 The possible letters are 'L', 'R' and 'M'.
 'L' and 'R' makes the rover spin 90 degrees left or right respectively, without moving from its current spot.
 'M' means move forward one grid point, and maintain the same heading.
+Doors connect rooms. Doors are represented by
+* a string representing the name of the door and
+* 2 sets of information for entering and leaving a room, each represented by
+    * a room
+    * a combination of x and y co-ordinates of the door and
+    * a letter representing one of the four cardinal compass points as the direction of the door.
 
 Assume that the square directly North from (x, y) is (x, y+1).
 
