@@ -1,3 +1,5 @@
+package com.lernoscio.rover;
+
 import com.lernoscio.rover.Rover;
 import com.lernoscio.rover.environment.Coordinates;
 import com.lernoscio.rover.environment.Direction;
