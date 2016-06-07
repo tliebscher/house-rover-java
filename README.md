@@ -30,6 +30,14 @@ Doors connect rooms. Doors are represented by
     * a combination of x and y co-ordinates of the door and
 * a letter representing one of the four cardinal compass points as the direction of the door.
 
+Stairs connect rooms too. Stairs are one-demensional and are represented by
+* a string representing the name of the door and
+* 2 sets of information for entering and leaving a room, each represented by
+    * a room
+    * a combination of x and y co-ordinates of the door and
+* a letter representing one of the four cardinal compass points as the direction of the door.
+* a number of stairs
+
 Assume that the square directly North from (x, y) is (x, y+1).
 
 Assume that the lower-left corner of a room is 0,0, while the upper right corner is denoted by a pair of positive integers.
