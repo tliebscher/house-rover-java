@@ -29,9 +29,16 @@ public class Room implements Location {
         doors.put(door.toString(), door);
     }
 
-    public Door getDoor(final Coordinates coordinates, final Direction direction) {
+    public Location getDoorExit(final Coordinates coordinates, final Direction direction) {
         String key = this.name + " " + coordinates.toString() + " " + direction.toString();
-        return (Door)doors.get(key);
+        Door door = (Door)doors.get(key);
+        return door.getExit();
+    }
+
+    public Coordinates getDoorExitCoordinates(final Coordinates coordinates, final Direction direction) {
+        String key = this.name + " " + coordinates.toString() + " " + direction.toString();
+        Door door = (Door)doors.get(key);
+        return door.getExitCoordinates();
     }
 
     @Override

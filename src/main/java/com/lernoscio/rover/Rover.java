@@ -50,9 +50,8 @@ public class Rover {
             // if facing door calculate new room & coordinates
             Room currentRoom = (Room)currentLocation;
             if (currentRoom.isFacingDoor(currentCoordinates, currentDirection)) {
-                Door door = currentRoom.getDoor(currentCoordinates, currentDirection);
-                Location newLocation = door.getExit();
-                Coordinates newCoordinates = door.getExitCoordinates();
+                Location newLocation = currentRoom.getDoorExit(currentCoordinates, currentDirection);
+                Coordinates newCoordinates = currentRoom.getDoorExitCoordinates(currentCoordinates, currentDirection);
                 currentLocation = newLocation;
                 currentCoordinates = newCoordinates;
                 return;
