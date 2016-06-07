@@ -8,7 +8,7 @@ package com.lernoscio.rover.environment;
  *  to check if another coordinate is outside or within
  *  bounds from 0,0 to current coordinate.
  */
-    
+
 public class Coordinates {
 
     private int xCoordinate;
