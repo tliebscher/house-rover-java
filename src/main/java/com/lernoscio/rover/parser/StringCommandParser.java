@@ -4,6 +4,7 @@ import com.lernoscio.rover.commands.ICommand;
 import com.lernoscio.rover.commands.MoveCommand;
 import com.lernoscio.rover.commands.RotateLeftCommand;
 import com.lernoscio.rover.commands.RotateRightCommand;
+import com.lernoscio.rover.commands.TurnAroundCommand;
 
 import java.util.*;
 
@@ -16,6 +17,7 @@ public class StringCommandParser {
         put("L", new RotateLeftCommand());
         put("R", new RotateRightCommand());
         put("M", new MoveCommand());
+        put("T", new TurnAroundCommand());
     }};
 
     private String commandString;

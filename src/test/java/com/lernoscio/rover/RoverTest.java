@@ -52,6 +52,20 @@ public class RoverTest {
     }
 
     @Test
+    public void canTurnAround() {
+        //Given
+        Room room = new Room("A",5,5);
+        Coordinates startingPosition = new Coordinates(1,2);
+        Rover rover = new Rover(room, startingPosition, Direction.N);
+
+        //When
+        rover.turnAround();
+
+        //then
+        Assert.assertEquals("A 1 2 S", rover.currentLocation());
+    }
+
+    @Test
     public void canMove() {
         //Given
         Room room = new Room("A",5,5);
@@ -94,6 +108,20 @@ public class RoverTest {
     }
 
     @Test
+    public void canRunCommandToTurnAround() {
+        //Given
+        Room room = new Room("A",5,5);
+        Coordinates startingPosition = new Coordinates(1,2);
+        Rover rover = new Rover(room, startingPosition, Direction.N);
+
+        //When
+        rover.run("T");
+
+        //then
+        Assert.assertEquals("A 1 2 S", rover.currentLocation());
+    }
+
+    @Test
     public void canRunCommandToMove() {
         //Given
         Room room = new Room("A",5,5);
@@ -112,10 +140,10 @@ public class RoverTest {
         //Given
         Room room = new Room("A",5,5);
         Coordinates startingPosition = new Coordinates(3,3);
-        Rover rover = new Rover(room, startingPosition, Direction.E);
+        Rover rover = new Rover(room, startingPosition, Direction.W);
 
         //When
-        rover.run("MMRMMRMRRM");
+        rover.run("TMMRMMRMRRM");
 
         //then
         Assert.assertEquals("A 5 1 E", rover.currentLocation());

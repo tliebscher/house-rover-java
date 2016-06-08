@@ -8,7 +8,7 @@ package com.lernoscio.rover.environment;
  *  distance in/on a room/stair for x coordinate
  *  and y coordinate.
  */
- 
+
 public enum Direction {
 
     N(0,1) {
@@ -20,6 +20,11 @@ public enum Direction {
         @Override
         public Direction right() {
             return E;
+        }
+
+        @Override
+        public Direction turn() {
+            return S;
         }
     },
 
@@ -33,6 +38,11 @@ public enum Direction {
         public Direction left() {
             return E;
         }
+
+        @Override
+        public Direction turn() {
+            return N;
+        }
     },
 
     E(1,0) {
@@ -44,6 +54,11 @@ public enum Direction {
         @Override
         public Direction left() {
             return N;
+        }
+
+        @Override
+        public Direction turn() {
+            return W;
         }
     },
 
@@ -57,6 +72,11 @@ public enum Direction {
         public Direction left() {
             return S;
         }
+
+        @Override
+        public Direction turn() {
+            return E;
+        }
     };
 
     private final int stepSizeOnXAxis;
@@ -69,6 +89,7 @@ public enum Direction {
 
     public abstract Direction right();
     public abstract Direction left();
+    public abstract Direction turn();
 
     public int stepSizeForXAxis() {
         return this.stepSizeOnXAxis;

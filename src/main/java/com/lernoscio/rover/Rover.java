@@ -44,6 +44,10 @@ public class Rover {
         this.currentDirection = this.currentDirection.left();
     }
 
+    public void turnAround() {
+        this.currentDirection = this.currentDirection.turn();
+    }
+
     public void move() {
         // if rover is in a room
         if (Room.class == currentLocation.getClass()) {
