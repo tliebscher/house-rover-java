@@ -16,6 +16,7 @@ public class Room implements Location {
 
     private String name = "noname";
     private HashMap<String, Door> doors = new HashMap<String, Door>();
+    private HashMap<String, Stair> stairs = new HashMap<String, Stair>();
     private Direction direction = null;
     private Coordinates bottomLeftCoordinates = new Coordinates(0, 0);
     private Coordinates topRightCoordinates = new Coordinates(0, 0);
@@ -29,6 +30,11 @@ public class Room implements Location {
         doors.put(door.toString(), door);
     }
 
+    public void addStair(final Stair stair) {
+        String key = stair.getEntryCoordinates().toString() + " " + stair.getDirection();
+        stairs.put(key, stair);
+    }
+
     public Location getDoorExit(final Coordinates coordinates, final Direction direction) {
         String key = this.name + " " + coordinates.toString() + " " + direction.toString();
         Door door = (Door)doors.get(key);
@@ -39,6 +45,18 @@ public class Room implements Location {
         String key = this.name + " " + coordinates.toString() + " " + direction.toString();
         Door door = (Door)doors.get(key);
         return door.getExitCoordinates();
+    }
+
+    public Location getStair(final Coordinates coordinates, final Direction direction) {
+        String key = coordinates.toString() + " " + direction.toString();
+        Stair stair = (Stair)stairs.get(key);
+        return stair;
+    }
+
+    public Coordinates getStairStartingCoordinates(final Coordinates coordinates, final Direction direction) {
+        String key = coordinates.toString() + " " + direction.toString();
+        Stair stair = (Stair)stairs.get(key);
+        return stair.getStartingCoordinates();
     }
 
     @Override
@@ -69,7 +87,10 @@ public class Room implements Location {
     }
 
     public boolean isFacingStair(final Coordinates position, final Direction direction) {
-        // @TODO implementation
+        for (Stair stair: stairs.values()) {
+            if (stair.isFacing(position, direction))
+                return true;
+        }
         return false;
     }
 }

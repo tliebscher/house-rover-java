@@ -24,13 +24,11 @@ Assume further that the x and y dimensions of a room are greater then 0.
 Assume that the square directly North from (x, y) is (x, y+1).
 
 In order to control a rover, users send a simple string of letters.
-The possible letters are 'L','R','T','U','D' and 'M'.
+The possible letters are 'L','R','T' and 'M'.
 'L'eft and 'R'ight makes the rover spin 90 degrees left or right respectively,
 without moving from its current spot.
 'T'urn makes the rover turn 180 degrees, without moving from its current spot.
 'M' means move forward one grid point, and maintain the same heading.
-'U'p means move upwards on a stair, and maintain the same heading.
-'D'own means move downwards on a stair, and maintain the same heading.
 
 Doors connect rooms. Doors are represented by
 * a string representing the name of the door and
@@ -46,7 +44,7 @@ Stairs connect rooms too. Stairs are one-demensional and are represented by
     * a combination of x and y co-ordinates of the door and
 * a letter representing one of the four cardinal compass points as the direction of the door.
 * a number of stairs
-Assume stairs are entered and left in the direction they are pointing to.
+Assume stairs can be entered on one side but left on both sides (the rover can turn).
 
 ### LICENSE
 

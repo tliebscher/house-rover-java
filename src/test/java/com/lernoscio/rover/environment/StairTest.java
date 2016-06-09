@@ -68,6 +68,106 @@ public class StairTest {
     }
 
     @Test
+    public void coordinateFacingExitRoomIsIdentified() {
+        //Given
+        Room entryRoom = new Room("A",5,5);
+        Room exitRoom = new Room("B",4,4);
+        String name = "AB";
+        int steps = 10;
+        Direction stairDirection = Direction.S;
+        Coordinates entryRoomStairCoordinates = new Coordinates(2,0);
+        Coordinates exitRoomStairCoordinates = new Coordinates(2,3);
+        Stair stair = new Stair(name,steps,stairDirection,entryRoom,entryRoomStairCoordinates,exitRoom,exitRoomStairCoordinates);
+
+        //When
+        Coordinates coordinates = new Coordinates(0,-9);
+        Direction direction = Direction.S;
+
+        //Then
+        Assert.assertTrue(stair.isFacingRoom(coordinates, direction));
+    }
+
+    @Test
+    public void coordinateFacingEntryRoomIsIdentified() {
+        //Given
+        Room entryRoom = new Room("A",5,5);
+        Room exitRoom = new Room("B",4,4);
+        String name = "AB";
+        int steps = 10;
+        Direction stairDirection = Direction.S;
+        Coordinates entryRoomStairCoordinates = new Coordinates(2,0);
+        Coordinates exitRoomStairCoordinates = new Coordinates(2,3);
+        Stair stair = new Stair(name,steps,stairDirection,entryRoom,entryRoomStairCoordinates,exitRoom,exitRoomStairCoordinates);
+
+        //When
+        Coordinates coordinates = new Coordinates(0,0);
+        Direction direction = Direction.N;
+
+        //Then
+        Assert.assertTrue(stair.isFacingRoom(coordinates, direction));
+    }
+
+    @Test
+    public void directionNotFacingEntryRoomIsIdentified() {
+        //Given
+        Room entryRoom = new Room("A",5,5);
+        Room exitRoom = new Room("B",4,4);
+        String name = "AB";
+        int steps = 10;
+        Direction stairDirection = Direction.S;
+        Coordinates entryRoomStairCoordinates = new Coordinates(2,0);
+        Coordinates exitRoomStairCoordinates = new Coordinates(2,3);
+        Stair stair = new Stair(name,steps,stairDirection,entryRoom,entryRoomStairCoordinates,exitRoom,exitRoomStairCoordinates);
+
+        //When
+        Coordinates coordinates = new Coordinates(0,0);
+        Direction direction = Direction.S;
+
+        //Then
+        Assert.assertFalse(stair.isFacingRoom(coordinates, direction));
+    }
+
+    @Test
+    public void directionNotFacingExitRoomIsIdentified() {
+        //Given
+        Room entryRoom = new Room("A",5,5);
+        Room exitRoom = new Room("B",4,4);
+        String name = "AB";
+        int steps = 10;
+        Direction stairDirection = Direction.S;
+        Coordinates entryRoomStairCoordinates = new Coordinates(2,0);
+        Coordinates exitRoomStairCoordinates = new Coordinates(2,3);
+        Stair stair = new Stair(name,steps,stairDirection,entryRoom,entryRoomStairCoordinates,exitRoom,exitRoomStairCoordinates);
+
+        //When
+        Coordinates coordinates = new Coordinates(0,-9);
+        Direction direction = Direction.N;
+
+        //Then
+        Assert.assertFalse(stair.isFacingRoom(coordinates, direction));
+    }
+
+    @Test
+    public void positionNotNotNearEntryOrExitRoomIsIdentified() {
+        //Given
+        Room entryRoom = new Room("A",5,5);
+        Room exitRoom = new Room("B",4,4);
+        String name = "AB";
+        int steps = 10;
+        Direction stairDirection = Direction.S;
+        Coordinates entryRoomStairCoordinates = new Coordinates(2,0);
+        Coordinates exitRoomStairCoordinates = new Coordinates(2,3);
+        Stair stair = new Stair(name,steps,stairDirection,entryRoom,entryRoomStairCoordinates,exitRoom,exitRoomStairCoordinates);
+
+        //When
+        Coordinates coordinates = new Coordinates(0,-5);
+        Direction direction = Direction.N;
+
+        //Then
+        Assert.assertFalse(stair.isFacingRoom(coordinates, direction));
+    }
+
+    @Test
     public void exitRoomIsReturned() {
         //Given
         Room entryRoom = new Room("A",5,5);

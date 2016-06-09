@@ -151,6 +151,54 @@ public class DirectionTest {
     }
 
     @Test
+    public void southIsIdentifiedAsOppositeOfNorth() {
+        //Given
+        Direction south = Direction.S;
+
+        //When
+        Direction north = Direction.N;
+
+        //Then
+        Assert.assertTrue(south.isOppositeOf(north));
+    }
+
+    @Test
+    public void eastIsIdentifiedAsOppositeOfWest() {
+        //Given
+        Direction east = Direction.E;
+
+        //When
+        Direction west = Direction.W;
+
+        //Then
+        Assert.assertTrue(east.isOppositeOf(west));
+    }
+
+    @Test
+    public void northIsIdentifiedAsOppositeOfSouth() {
+        //Given
+        Direction north = Direction.N;
+
+        //When
+        Direction south = Direction.S;
+
+        //Then
+        Assert.assertTrue(north.isOppositeOf(south));
+    }
+
+    @Test
+    public void westIsIdentifiedAsOppositeOfEast() {
+        //Given
+        Direction west = Direction.W;
+
+        //When
+        Direction east = Direction.E;
+
+        //Then
+        Assert.assertTrue(west.isOppositeOf(east));
+    }
+
+    @Test
     public void eastIsOneStepForwardOnXAxis() {
         //Given
         Direction east = Direction.E;

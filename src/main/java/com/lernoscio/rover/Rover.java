@@ -18,6 +18,7 @@ import com.lernoscio.rover.environment.Location;
 import com.lernoscio.rover.environment.Direction;
 import com.lernoscio.rover.environment.Room;
 import com.lernoscio.rover.environment.Door;
+import com.lernoscio.rover.environment.Stair;
 
 import java.util.List;
 public class Rover {
@@ -51,8 +52,9 @@ public class Rover {
     public void move() {
         // if rover is in a room
         if (Room.class == currentLocation.getClass()) {
-            // if facing door calculate new room & coordinates
             Room currentRoom = (Room)currentLocation;
+
+            // if facing door calculate new room & coordinates
             if (currentRoom.isFacingDoor(currentCoordinates, currentDirection)) {
                 Location newLocation = currentRoom.getDoorExit(currentCoordinates, currentDirection);
                 Coordinates newCoordinates = currentRoom.getDoorExitCoordinates(currentCoordinates, currentDirection);
@@ -60,9 +62,31 @@ public class Rover {
                 currentCoordinates = newCoordinates;
                 return;
             }
+
+            // if facing stair calculate stair & coordinates
+            if (currentRoom.isFacingStair(currentCoordinates, currentDirection)) {
+                Location newLocation = currentRoom.getStair(currentCoordinates, currentDirection);
+                Coordinates newCoordinates = currentRoom.getStairStartingCoordinates(currentCoordinates, currentDirection);
+                currentLocation = newLocation;
+                currentCoordinates = newCoordinates;
+                return;
+            }
         }
 
-        // calculate new position in current room
+        if (Stair.class == currentLocation.getClass()) {
+            Stair currentStair = (Stair)currentLocation;
+
+            // if facing door calculate new room & coordinates
+            if (currentStair.isFacingRoom(currentCoordinates, currentDirection)) {
+                Location newLocation = currentStair.getExit(currentCoordinates, currentDirection);
+                Coordinates newCoordinates = currentStair.getExitCoordinates(currentCoordinates, currentDirection);
+                currentLocation = newLocation;
+                currentCoordinates = newCoordinates;
+                return;
+            }
+        }
+
+        // calculate new position in current location
         Coordinates positionAfterMove = currentCoordinates.newCoordinatesFor(currentDirection.stepSizeForXAxis(), currentDirection.stepSizeForYAxis());
         if (currentLocation.isWithin(positionAfterMove))
             currentCoordinates = positionAfterMove;

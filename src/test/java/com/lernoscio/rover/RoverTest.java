@@ -5,6 +5,7 @@ import com.lernoscio.rover.environment.Coordinates;
 import com.lernoscio.rover.environment.Direction;
 import com.lernoscio.rover.environment.Room;
 import com.lernoscio.rover.environment.Door;
+import com.lernoscio.rover.environment.Stair;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -203,4 +204,43 @@ public class RoverTest {
         Assert.assertEquals("Y 2 3 S", rover.currentLocation());
     }
 
+    @Test
+    public void canRunCommandAndStopOnStairs() {
+        //Given
+        Room room1 = new Room("X",5,5);
+        Room room2 = new Room("Y",4,4);
+        Coordinates room1StairCoordinates = new Coordinates(2,0);
+        Coordinates room2StairCoordinates = new Coordinates(2,3);
+        Stair stair = new Stair("XY",5,Direction.S,room1,room1StairCoordinates,room2,room2StairCoordinates);
+        room1.addStair(stair);
+        room2.addStair(stair);
+        Coordinates startingPosition = new Coordinates(3,3);
+        Rover rover = new Rover(room1, startingPosition, Direction.S);
+
+        //When
+        rover.run("RMLMMMMMMMM");
+
+        //then
+        Assert.assertEquals("XY 0 -4 S", rover.currentLocation());
+    }
+
+    @Test
+    public void canRunCommandAndSwitchRoomsViaStairs() {
+        //Given
+        Room room1 = new Room("X",5,5);
+        Room room2 = new Room("Y",4,4);
+        Coordinates room1StairCoordinates = new Coordinates(2,0);
+        Coordinates room2StairCoordinates = new Coordinates(2,3);
+        Stair stair = new Stair("XY",5,Direction.S,room1,room1StairCoordinates,room2,room2StairCoordinates);
+        room1.addStair(stair);
+        room2.addStair(stair);
+        Coordinates startingPosition = new Coordinates(3,3);
+        Rover rover = new Rover(room1, startingPosition, Direction.S);
+
+        //When
+        rover.run("RMLMMMMMMMMM");
+
+        //then
+        Assert.assertEquals("Y 2 3 S", rover.currentLocation());
+    }
 }

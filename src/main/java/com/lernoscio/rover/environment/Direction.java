@@ -91,6 +91,10 @@ public enum Direction {
     public abstract Direction left();
     public abstract Direction turn();
 
+    public boolean isOppositeOf(Direction direction) {
+        return (turn() == direction);
+    }
+
     public int stepSizeForXAxis() {
         return this.stepSizeOnXAxis;
     }

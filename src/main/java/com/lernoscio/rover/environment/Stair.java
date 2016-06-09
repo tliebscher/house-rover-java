@@ -15,6 +15,8 @@ public class Stair implements Location {
 
     private Coordinates bottomLeftCoordinates = new Coordinates(0, 0);
     private Coordinates topRightCoordinates = new Coordinates(0, 0);
+    private Coordinates startingCoordinates;
+    private Coordinates endingCoordinates;
 
     private Coordinates entryAt;
     private Coordinates exitAt;
@@ -51,13 +53,21 @@ public class Stair implements Location {
 
         // setting dimension
         if (Direction.N == direction) {
-            this.topRightCoordinates = this.topRightCoordinates.newCoordinatesFor(0,steps);
+            this.topRightCoordinates = this.topRightCoordinates.newCoordinatesFor(0,steps-1);
+            this.startingCoordinates = this.bottomLeftCoordinates;
+            this.endingCoordinates = this.topRightCoordinates;
         } else if (Direction.S == direction) {
-            this.bottomLeftCoordinates = this.bottomLeftCoordinates.newCoordinatesFor(0,0-steps);
+            this.bottomLeftCoordinates = this.bottomLeftCoordinates.newCoordinatesFor(0,1-steps);
+            this.startingCoordinates = this.topRightCoordinates;
+            this.endingCoordinates = this.bottomLeftCoordinates;
         } else if (Direction.E == direction) {
-            this.topRightCoordinates = this.topRightCoordinates.newCoordinatesFor(steps,0);
+            this.topRightCoordinates = this.topRightCoordinates.newCoordinatesFor(steps-1,0);
+            this.startingCoordinates = this.bottomLeftCoordinates;
+            this.endingCoordinates = this.topRightCoordinates;
         } else if (Direction.W == direction) {
-            this.bottomLeftCoordinates = this.bottomLeftCoordinates.newCoordinatesFor(0-steps,0);
+            this.bottomLeftCoordinates = this.bottomLeftCoordinates.newCoordinatesFor(1-steps,0);
+            this.startingCoordinates = this.topRightCoordinates;
+            this.endingCoordinates = this.bottomLeftCoordinates;
         } else {
             throw new IllegalArgumentException("Unsupported direction");
         }
@@ -65,7 +75,7 @@ public class Stair implements Location {
 
     @Override
     public String toString() {
-        return this.entryRoom.toString() + " " + this.entryAt.toString() + " " + this.direction;
+        return this.name;
     }
 
     public String getName() {
@@ -73,12 +83,46 @@ public class Stair implements Location {
         return this.name;
     }
 
+    public Location getEntry() {
+        return (Location)this.entryRoom;
+    }
+
     public Location getExit() {
         return (Location)this.exitRoom;
     }
 
+    public Location getExit(final Coordinates position, final Direction direction) {
+        if (this.endingCoordinates.equals(position) && (direction == this.direction)) {
+            return this.exitRoom;
+        } else if (this.startingCoordinates.equals(position) && (direction == this.direction.turn())) {
+            return this.entryRoom;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public Coordinates getEntryCoordinates() {
+        return this.entryAt;
+    }
+
     public Coordinates getExitCoordinates() {
         return this.exitAt;
+    }
+
+    public Coordinates getExitCoordinates(final Coordinates position, final Direction direction) {
+        if (this.endingCoordinates.equals(position) && (direction == this.direction)) {
+            return this.exitAt;
+        } else if (this.startingCoordinates.equals(position) && (direction == this.direction.turn())) {
+            return this.entryAt;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public Coordinates getStartingCoordinates() {
+        return this.startingCoordinates;
     }
 
     public boolean isWithin(final Coordinates coordinates) {
@@ -89,4 +133,12 @@ public class Stair implements Location {
         return (this.entryAt.equals(position) && (direction == this.direction));
     }
 
+    public boolean isFacingRoom(final Coordinates position, final Direction direction) {
+        return ((this.endingCoordinates.equals(position) && (direction == this.direction)) ||
+                (this.startingCoordinates.equals(position) && (direction == this.direction.turn())));
+    }
+
+    public Direction getDirection() {
+        return this.direction;
+    }
 }
